@@ -1,0 +1,48 @@
+﻿@using System
+@using System.Collections.Generic
+@using MVC.Models
+
+@{
+    // Layout = null;
+    // DateTime x = (DateTime)ViewData["x"]; // outboxing from an attribute to an object
+    List<Student> studenti = (List<Student>)ViewData["studenti"];
+    ViewBag.Title = "Prikaz studenata";
+}
+
+
+@* Rok za zavrsetak radova je: @x.ToString("D")*@
+
+Spisak studenata:
+<br />
+<table class="table table-striped" style="border: 1px solid green;">
+    <thead style="background-color: green; color: white;">
+        <tr>
+            <th>id</th>
+            <th>ime</th>
+            <th>prezime</th>
+            <th>Broj indexa</th>
+            <th>Fakultet</th>
+            <th>Smjer</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Student item in studenti)
+        {
+            <tr>
+                <td>@item.Id.</td>
+                <td>@item.Korisnik.Ime</td>
+                <td>@item.Korisnik.Prezime</td>
+                <td>@item.BrojIndexa</td>
+                <td>@item.Smjer.Fakultet.Naziv</td>
+                <td>@item.Smjer.Naziv</td>
+                <td>
+                    <a href="/ModulStudentskaSluzba/Student/Obrisi?studentId=@item.Id">Delete</a>
+                    <a href="/ModulStudentskaSluzba/Student/Uredi?studentId=@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
